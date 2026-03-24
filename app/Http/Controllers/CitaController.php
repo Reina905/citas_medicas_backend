@@ -8,21 +8,15 @@ class CitaController extends Controller
 {
     public function index(Request $request)
     {
-        $expedientes = Expediente::paginate(10); 
-        return ExpedienteResource::collection($expedientes);
+
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(ExpedienteRequest $request)
+    public function store(Request $request)
     {
-        $data = $request->validated();
 
-        $expediente = Expediente::create($data);
-        $expediente->refresh();
-
-        return response()->json(ExpedienteResource::make($expediente), 201);
     }
 
     /**
