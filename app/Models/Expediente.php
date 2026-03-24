@@ -10,7 +10,8 @@ class Expediente extends Model
     use HasFactory;
 
     protected $primaryKey = 'expediente_id';
-    public $incrementing = true;
+    public $incrementing = true; 
+    protected $keyType = 'int';
     protected $fillable = [
         'paciente_id',
         'tipo_sangre',

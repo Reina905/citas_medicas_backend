@@ -16,7 +16,7 @@ class ExpedienteResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'id' => $this->id,
+            'expediente_id' => $this->expediente_id,
             'paciente' => PacienteResource::make($this->whenLoaded('paciente')),
             'tipo_sangre' => $this->tipo_sangre,
             'alergias' => $this->alergias,

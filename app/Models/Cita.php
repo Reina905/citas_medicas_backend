@@ -8,6 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Cita extends Model
 {
     use HasFactory;
+
+    protected $primaryKey = 'cita_id';
+
+    public $incrementing = true; 
+    protected $keyType = 'int';
+
     protected $fillable = [
         'paciente_id',
         'user_id',

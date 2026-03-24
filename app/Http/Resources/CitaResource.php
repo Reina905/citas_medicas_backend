@@ -4,6 +4,8 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use App\Http\Resources\UserResource;
+use App\Http\Resources\PacienteResource;
 
 class CitaResource extends JsonResource
 {
@@ -15,7 +17,7 @@ class CitaResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'id' => $this->id,
+            'cita_id' => $this->cita_id,
             'paciente' => PacienteResource::make($this->whenLoaded('paciente')),
             'doctor' => UserResource::make($this->whenLoaded('user')),
             'dia' => $this->dia,

@@ -15,7 +15,7 @@ class HorarioResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'id' => $this->id,
+            'horario_id' => $this->horario_id,
             'doctor' => UserResource::make($this->whenLoaded('user')),
             'dia' => $this->dia,
             'hora_inicio' => $this->hora_inicio,

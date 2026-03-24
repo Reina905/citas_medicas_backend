@@ -9,6 +9,8 @@ class Horario extends Model
 {
     use HasFactory;
     protected $primaryKey = 'horario_id';
+    public $incrementing = true; 
+    protected $keyType = 'int';
     protected $fillable = [
         'user_id',
         'dia',
