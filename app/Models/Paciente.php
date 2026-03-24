@@ -14,5 +14,6 @@ class Paciente extends Model
         'fecha_nacimiento',
         'dui',
         'genero',
+        'correo',
     ];
 }
