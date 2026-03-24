@@ -12,7 +12,7 @@ class CitaController extends Controller
 {
     public function index(Request $request)
     {
-        $citas = Cita::paginate();
+        $citas = Cita::with(['paciente', 'user'])->paginate();
         return CitaResource::collection($citas);
     }
 
@@ -24,8 +24,11 @@ class CitaController extends Controller
         $data = $request->validated();
 
         $user = User::findOrFail($data['user_id']);
+        if ($user->rol !== 'doctor') {
+            return response()->json(['message' => 'El usuario debe ser doctor'], 422);
+        }
 
-        if ($user->role === 'doctor') {
+        if ($user->rol === 'doctor') {
 
             $existeConflicto = Cita::where('user_id', $data['user_id'])
                 ->where('dia', $data['dia'])
@@ -43,6 +46,9 @@ class CitaController extends Controller
         }
 
         $cita = Cita::create($data);
+
+        // Cargar relaciones antes de pasarlo al Resource
+        $cita->load(['paciente', 'user']);
 
         return response()->json(CitaResource::make($cita), 201);
     }
@@ -64,12 +70,15 @@ class CitaController extends Controller
         $data = $request->validated();
 
         $user = User::findOrFail($data['user_id']);
+        if ($user->rol !== 'doctor') {
+            return response()->json(['message' => 'El usuario debe ser doctor'], 422);
+        }
 
-        if ($user->role === 'doctor') {
+        if ($user->rol === 'doctor') {
 
             $existeConflicto = Cita::where('user_id', $data['user_id'])
                 ->where('dia', $data['dia'])
-                ->where('id', '!=', $cita->id) 
+                ->where('cita_id', '!=', $cita->cita_id) 
                 ->where(function ($query) use ($data) {
                     $query->where('hora_inicio', '<', $data['hora_fin'])
                         ->where('hora_fin', '>', $data['hora_inicio']);
@@ -84,6 +93,9 @@ class CitaController extends Controller
         }
 
         $cita->update($data);
+
+        // Cargar relaciones antes de pasarlo al Resource
+        $cita->load(['paciente', 'user']);
 
         return response()->json(CitaResource::make($cita), 201);
     }

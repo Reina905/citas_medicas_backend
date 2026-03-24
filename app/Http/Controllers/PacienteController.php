@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\PacienteRequest;
+use App\Http\Requests\PacienteUpdateRequest;
 use App\Http\Resources\PacienteResource;
 use App\Models\Paciente;
 use Illuminate\Http\Request;
@@ -20,7 +21,7 @@ class PacienteController extends Controller
             $query->where('nombre', 'like', '%'.$request->input('nombre').'%'))
         ->when($request->has('DUI'), fn ($query) => 
             $query->where('DUI', $request->DUI))
-        ->paginate();
+        ->get();
 
         return PacienteResource::collection($pacientes);
     }
@@ -49,7 +50,7 @@ class PacienteController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(PacienteRequest $request, int $paciente)
+    public function update(PacienteUpdateRequest $request, int $paciente)
     {
         $pacienteActualizado = Paciente::findOrFail($paciente);
 

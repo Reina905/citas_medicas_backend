@@ -14,12 +14,12 @@ class HorarioController extends Controller
         $horarios = Horario::query();
         $horarios = $horarios 
         ->when($request->has('dia'), fn ($query) => 
-            $query->where('dia', 'like', '%'.$request->input('dia').'%'))
+            $query->where('dia', $request->dia))
         ->get();
 
         return HorarioResource::collection($horarios);
     }
-
+  
     /**
      * Store a newly created resource in storage.
      */

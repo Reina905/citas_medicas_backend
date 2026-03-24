@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 
-class PacienteRequest extends FormRequest
+class PacienteUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,11 +23,11 @@ class PacienteRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'nombre' => ['required', 'string', 'min:3', 'max:100'],
-            'apellido'=> ['required', 'string', 'min:3', 'max:100'],
-            'fecha_nacimiento' => ['required', 'date', 'before:today'],
-            'DUI' => ['required', 'string', 'unique:pacientes,dui', 'regex:/^\d{8}-\d$/'],
-            'genero' => ['required', 'string', 'in:femenino,masculino,otro'],
+            'nombre' => ['string', 'min:3', 'max:100'],
+            'apellido'=> ['string', 'min:3', 'max:100'],
+            'fecha_nacimiento' => ['date', 'before:today'],
+            'DUI' => ['string', 'unique:pacientes,dui', 'regex:/^\d{8}-\d$/'],
+            'genero' => ['string', 'in:femenino,masculino,otro'],
         ];
     }
 }

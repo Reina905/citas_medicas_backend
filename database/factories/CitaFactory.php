@@ -19,10 +19,11 @@ class CitaFactory extends Factory
      */
     public function definition(): array
     {
+        $doctor = User::factory()->state(['rol' => 'doctor'])->create();
         $horaInicio = fake()->dateTimeBetween('08:00', '18:00');
         return [
             'paciente_id' => Paciente::factory(),
-            'user_id' => User::factory(),
+            'user_id' => $doctor->id,
             'dia' => fake()->dateTimeBetween('now', '+2 month')->format('Y-m-d'),
             'hora_inicio' => $horaInicio->format('H:i:s'),
             'hora_fin' => (clone $horaInicio)->modify('+30 minutes')->format('H:i:s'),
