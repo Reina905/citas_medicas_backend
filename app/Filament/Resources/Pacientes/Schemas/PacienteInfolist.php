@@ -23,7 +23,7 @@ class PacienteInfolist
                         TextEntry::make('genero'),
                     ]),
 
-                Section::make('🩺 Expediente Clínico')
+                Section::make('Expediente Clínico')
                     ->columns(2)
                     ->schema([
                         TextEntry::make('expediente.tipo_sangre')
