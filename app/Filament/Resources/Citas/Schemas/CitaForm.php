@@ -4,6 +4,7 @@ namespace App\Filament\Resources\Citas\Schemas;
 
 use App\Models\Paciente;
 use App\Models\User;
+use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TimePicker;
 use Filament\Schemas\Components\Section;
@@ -36,16 +37,10 @@ class CitaForm
                             ->searchable()
                             ->required(),
 
-                        Select::make('dia')
+                        DatePicker::make('dia')
                             ->label('Día')
-                            ->options([
-                                'Lunes' => 'Lunes',
-                                'Martes' => 'Martes',
-                                'Miércoles' => 'Miércoles',
-                                'Jueves' => 'Jueves',
-                                'Viernes' => 'Viernes',
-                                'Sábado' => 'Sábado',
-                            ])
+                            ->minDate(now()->startOfDay())
+                            ->format('Y-m-d')
                             ->required(),
 
                         TimePicker::make('hora_inicio')

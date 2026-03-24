@@ -24,7 +24,7 @@ class CitaFactory extends Factory
         return [
             'paciente_id' => Paciente::factory(),
             'user_id' => $doctor->id,
-            'dia' => fake()->dateTimeBetween('now', '+2 month')->format('Y-m-d'),
+            'dia' => fake()->dateTimeBetween('now', '+2 month'),
             'hora_inicio' => $horaInicio->format('H:i:s'),
             'hora_fin' => (clone $horaInicio)->modify('+30 minutes')->format('H:i:s'),
         ];

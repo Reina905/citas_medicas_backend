@@ -22,6 +22,10 @@ class Cita extends Model
         'hora_fin',
     ];
 
+    protected $casts = [
+        'dia' => 'date',
+    ];
+
     public function user()
     {
         return $this->belongsTo(User::class);
@@ -31,6 +35,4 @@ class Cita extends Model
     {
         return $this->belongsTo(Paciente::class);
     }
-
-
 }

@@ -20,7 +20,7 @@ class CitaResource extends JsonResource
             'cita_id' => $this->cita_id,
             'paciente' => PacienteResource::make($this->whenLoaded('paciente')),
             'doctor' => UserResource::make($this->whenLoaded('user')),
-            'dia' => $this->dia,
+            'dia' => $this->dia?->format('Y-m-d'),
             'hora_inicio' => $this->hora_inicio,
             'hora_fin' => $this->hora_fin,
         ];
