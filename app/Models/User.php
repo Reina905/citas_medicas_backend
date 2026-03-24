@@ -38,7 +38,6 @@ class User extends Authenticatable implements FilamentUser
 
     public function canAccessPanel(Panel $panel): bool
     {
-        \Log::info('canAccessPanel called for user: ' . $this->id);
         return true;
     }
 }
