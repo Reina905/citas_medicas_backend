@@ -5,7 +5,6 @@ use App\Http\Controllers\CitaController;
 use App\Http\Controllers\ExpedienteController;
 use App\Http\Controllers\HorarioController;
 use App\Http\Controllers\PacienteController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 Route::post('v1/login', [AuthController::class, 'login']);
@@ -25,6 +24,9 @@ Route::group(['prefix' => 'v1'], function () {
 
     Route::get('horarios', [HorarioController::class,'index']);
     Route::post('horarios', [HorarioController::class,'store']);
+    Route::get('horarios/{id}', [HorarioController::class, 'show']);
+    Route::patch('horarios/{id}', [HorarioController::class, 'update']);
+    Route::delete('horarios/{id}', [HorarioController::class, 'destroy']);
 
     Route::get('expedientes', [ExpedienteController::class,'index']);
     Route::post('expedientes', [ExpedienteController::class,'store']);
