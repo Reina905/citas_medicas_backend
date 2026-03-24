@@ -13,7 +13,6 @@ class Paciente extends Model
         'apellido',
         'fecha_nacimiento',
         'dui',
-        'genero',
-        'correo',
+        'genero'
     ];
 }

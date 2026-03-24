@@ -12,15 +12,16 @@ class ExpedienteResource extends JsonResource
      *
      * @return array<string, mixed>
      */
+
     public function toArray(Request $request): array
     {
         return [
             'id' => $this->id,
-            //'paciente' => $this
+            'paciente' => PacienteResource::make($this->whenLoaded('paciente')),
             'tipo_sangre' => $this->tipo_sangre,
             'alergias' => $this->alergias,
             'condiciones' => $this->condiciones,
-            'medicamentos' => $this->medicamentos,
+            'medicaciones' => $this->medicaciones,
             'notas'=> $this->notas,
         ];
     }

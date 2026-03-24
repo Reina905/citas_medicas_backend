@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ExpedienteController;
+use App\Http\Controllers\HorarioController;
 use App\Http\Controllers\PacienteController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -16,4 +18,10 @@ Route::middleware('auth:sanctum')->prefix('v1')->group(function () {
     Route::post('pacientes', [PacienteController::class,'store']);
     Route::get('/pacientes/{paciente}', [PacienteController::class, 'show']);
     Route::patch('/pacientes/{paciente}', [PacienteController::class, 'update']);
+
+    Route::get('horarios', [HorarioController::class,'index']);
+    Route::post('horarios', [HorarioController::class,'store']);
+
+    Route::get('expedientes', [ExpedienteController::class,'index']);
+    Route::post('expedientes', [ExpedienteController::class,'store']);
 });

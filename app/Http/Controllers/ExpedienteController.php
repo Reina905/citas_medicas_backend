@@ -2,35 +2,30 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\HorarioRequest;
-use App\Http\Resources\HorarioResource;
-use App\Models\Horario;
+use App\Http\Requests\ExpedienteRequest;
+use App\Http\Resources\ExpedienteResource;
+use App\Models\Expediente;
 use Illuminate\Http\Request;
 
-class HorarioController extends Controller
+class ExpedienteController extends Controller
 {
     public function index(Request $request)
     {
-        $horarios = Horario::query();
-        $horarios = $horarios 
-        ->when($request->has('dia'), fn ($query) => 
-            $query->where('dia', 'like', '%'.$request->input('dia').'%'))
-        ->get();
-
-        return HorarioResource::collection($horarios);
+        $expedientes = Expediente::paginate(10); 
+        return ExpedienteResource::collection($expedientes);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(HorarioRequest $request)
+    public function store(ExpedienteRequest $request)
     {
         $data = $request->validated();
 
-        $horario = Horario::create($data);
-        $horario->refresh();
+        $expediente = Expediente::create($data);
+        $expediente->refresh();
 
-        return response()->json(HorarioResource::make($horario), 201);
+        return response()->json(ExpedienteResource::make($expediente), 201);
     }
 
     /**
