@@ -15,6 +15,7 @@ use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
 
 class CitaResource extends Resource
 {
@@ -44,6 +45,18 @@ class CitaResource extends Resource
         return [
             //
         ];
+    }
+
+    public static function getEloquentQuery(): Builder
+    {
+        $query = parent::getEloquentQuery();
+        $user = auth()->user();
+
+        if ($user->hasRole('doctor')) {
+            return $query->where('user_id', $user->id);
+        }
+
+        return $query;
     }
 
     public static function getPages(): array

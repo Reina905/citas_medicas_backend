@@ -7,6 +7,7 @@ use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Actions\ViewAction;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 
 class UsersTable
@@ -16,26 +17,34 @@ class UsersTable
         return $table
             ->columns([
                 TextColumn::make('name')
-                    ->searchable(),
-                TextColumn::make('email')
-                    ->label('Email address')
-                    ->searchable(),
-                TextColumn::make('email_verified_at')
-                    ->dateTime()
+                    ->label('Nombre')
+                    ->searchable()
                     ->sortable(),
-                TextColumn::make('rol')
+                TextColumn::make('email')
+                    ->label('Correo')
                     ->searchable(),
+                TextColumn::make('rol')
+                    ->label('Rol')
+                    ->badge()
+                    ->color(fn(string $state) => match($state) {
+                        'admin'     => 'danger',
+                        'doctor'    => 'success',
+                        'asistente' => 'warning',
+                        default     => 'gray',
+                    }),
                 TextColumn::make('created_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                TextColumn::make('updated_at')
-                    ->dateTime()
+                    ->label('Creado')
+                    ->dateTime('d/m/Y H:i')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-                //
+                SelectFilter::make('rol')
+                    ->options([
+                        'admin'     => 'Administrador',
+                        'doctor'    => 'Médico',
+                        'asistente' => 'Asistente',
+                    ]),
             ])
             ->recordActions([
                 ViewAction::make(),

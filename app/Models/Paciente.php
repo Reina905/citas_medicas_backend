@@ -9,9 +9,9 @@ class Paciente extends Model
 {
     use HasFactory;
     protected $primaryKey = 'paciente_id';
-    public $incrementing = true; 
+    public $incrementing = true;
     protected $keyType = 'int';
-    
+
     protected $fillable = [
         'nombre',
         'apellido',
@@ -19,4 +19,9 @@ class Paciente extends Model
         'DUI',
         'genero'
     ];
+
+    public function expediente()
+    {
+        return $this->hasOne(Expediente::class, 'paciente_id', 'paciente_id');
+    }
 }

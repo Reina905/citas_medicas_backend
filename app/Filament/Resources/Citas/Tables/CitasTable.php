@@ -2,11 +2,13 @@
 
 namespace App\Filament\Resources\Citas\Tables;
 
+use App\Models\User;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Actions\ViewAction;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 
 class CitasTable
@@ -15,36 +17,36 @@ class CitasTable
     {
         return $table
             ->columns([
-                TextColumn::make('paciente_id')
-                    ->numeric()
+                TextColumn::make('paciente.nombre')
+                    ->label('Paciente')
+                    ->searchable()
                     ->sortable(),
-                TextColumn::make('user_id')
-                    ->numeric()
+                TextColumn::make('user.name')
+                    ->label('Médico')
+                    ->searchable()
                     ->sortable(),
                 TextColumn::make('dia')
-                    ->date()
                     ->sortable(),
                 TextColumn::make('hora_inicio')
-                    ->time()
+                    ->time('H:i')
                     ->sortable(),
                 TextColumn::make('hora_fin')
-                    ->time()
+                    ->time('H:i')
                     ->sortable(),
-                TextColumn::make('created_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                TextColumn::make('updated_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-                //
+                SelectFilter::make('user_id')
+                    ->label('Filtrar por Médico')
+                    ->options(
+                        User::where('rol', 'doctor')->pluck('name', 'id')
+                    )
+                    ->visible(fn() => !auth()->user()->hasRole('doctor')),
             ])
             ->recordActions([
                 ViewAction::make(),
                 EditAction::make(),
+                DeleteBulkAction::make()
+                    ->visible(fn() => auth()->user()->hasRole('admin')),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([

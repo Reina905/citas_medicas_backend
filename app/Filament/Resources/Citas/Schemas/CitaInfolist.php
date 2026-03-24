@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\Citas\Schemas;
 
 use Filament\Infolists\Components\TextEntry;
+use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
 
 class CitaInfolist
@@ -11,22 +12,22 @@ class CitaInfolist
     {
         return $schema
             ->components([
-                TextEntry::make('paciente_id')
-                    ->numeric(),
-                TextEntry::make('user_id')
-                    ->numeric(),
-                TextEntry::make('dia')
-                    ->date(),
-                TextEntry::make('hora_inicio')
-                    ->time(),
-                TextEntry::make('hora_fin')
-                    ->time(),
-                TextEntry::make('created_at')
-                    ->dateTime()
-                    ->placeholder('-'),
-                TextEntry::make('updated_at')
-                    ->dateTime()
-                    ->placeholder('-'),
+                Section::make('Detalle de la Cita')
+                    ->columns(2)
+                    ->schema([
+                        TextEntry::make('paciente.nombre')
+                            ->label('Paciente'),
+                        TextEntry::make('user.name')
+                            ->label('Médico'),
+                        TextEntry::make('dia')
+                            ->label('Día'),
+                        TextEntry::make('hora_inicio')
+                            ->label('Hora Inicio')
+                            ->time('H:i'),
+                        TextEntry::make('hora_fin')
+                            ->label('Hora Fin')
+                            ->time('H:i'),
+                    ]),
             ]);
     }
 }
