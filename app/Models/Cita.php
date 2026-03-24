@@ -33,6 +33,6 @@ class Cita extends Model
 
     public function paciente()
     {
-        return $this->belongsTo(Paciente::class);
+        return $this->belongsTo(Paciente::class, 'paciente_id', 'paciente_id');
     }
 }
