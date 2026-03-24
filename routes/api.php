@@ -33,4 +33,5 @@ Route::group(['prefix' => 'v1'], function () {
     Route::post('citas', [CitaController::class, 'store']); 
     Route::put('citas/{id}', [CitaController::class, 'update']);
     Route::delete('citas/{id}', [CitaController::class, 'destroy']);
+    Route::get('citas/{id}', [CitaController::class, 'show']);
 });
