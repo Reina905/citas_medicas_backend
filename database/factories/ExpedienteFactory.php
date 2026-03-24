@@ -18,7 +18,11 @@ class ExpedienteFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'tipo_sangre' => fake()->randomElement(['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-']),
+            'alergias' => fake()->sentence(),
+            'condiciones' => fake()->sentence(),
+            'medicaciones' => fake()->sentence(),
+            'notas' => fake()->paragraph(),
         ];
     }
 }

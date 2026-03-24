@@ -18,7 +18,11 @@ class PacienteFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'nombre' => fake()->firstName(),
+            'apellido' => fake()->lastName(),
+            'fecha_nacimiento' => fake()->date('Y-m-d', '-18 years'),
+            'DUI' => fake()->unique()->numerify('########-#'),
+            'genero' => fake()->randomElement(['masculino', 'femenino']),
         ];
     }
 }
