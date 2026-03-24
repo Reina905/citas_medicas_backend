@@ -8,12 +8,20 @@ use Illuminate\Database\Eloquent\Model;
 class Expediente extends Model
 {
     use HasFactory;
+
+    protected $primaryKey = 'expediente_id';
+    public $incrementing = true;
     protected $fillable = [
         'paciente_id',
         'tipo_sangre',
         'alergias',
         'condiciones',
-        'medicamentos',
+        'medicaciones',
         'notas'
     ];
+
+    public function paciente()
+    {
+        return $this->belongsTo(Paciente::class, 'paciente_id', 'paciente_id');
+    }
 }
