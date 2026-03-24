@@ -43,4 +43,12 @@ class User extends Authenticatable implements FilamentUser
         \Log::info('canAccessPanel - user: ' . $this->id . ' roles: ' . $this->getRoleNames());
         return true;
     }
+    protected static function booted()
+    {
+        static::saved(function ($user) {
+            if ($user->rol) {
+                $user->syncRoles([$user->rol]);
+            }
+        });
+    }
 }
