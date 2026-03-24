@@ -16,8 +16,8 @@ class CitaResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            //'paciente' => $this
-            //'medico' => $this->description
+            'paciente' => PacienteResource::make($this->whenLoaded('paciente')),
+            'doctor' => UserResource::make($this->whenLoaded('user')),
             'dia' => $this->dia,
             'hora_inicio' => $this->hora_inicio,
             'hora_fin' => $this->hora_fin,

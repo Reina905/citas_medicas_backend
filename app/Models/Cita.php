@@ -15,4 +15,14 @@ class Cita extends Model
         'hora_inicio',
         'hora_fin',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function paciente()
+    {
+        return $this->belongsTo(Paciente::class);
+    }
 }

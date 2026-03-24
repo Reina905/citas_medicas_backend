@@ -16,7 +16,7 @@ class HorarioResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'medico' => UserResource::make($this->whenLoaded('user')),
+            'doctor' => UserResource::make($this->whenLoaded('user')),
             'dia' => $this->dia,
             'hora_inicio' => $this->hora_inicio,
             'hora_fin' => $this->hora_fin,

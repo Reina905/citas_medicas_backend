@@ -19,7 +19,7 @@ class PacienteResource extends JsonResource
             'nombre' => $this->nombre,
             'apellido' => $this->apellido,
             'fecha_nacimiento' => $this->fecha_nacimiento,
-            'dui' => $this->dui,
+            'DUI' => $this->DUI,
             'genero' => $this->genero
         ];
     }

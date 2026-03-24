@@ -18,10 +18,8 @@ class PacienteController extends Controller
         $pacientes = $pacientes 
         ->when($request->has('nombre'), fn ($query) => 
             $query->where('nombre', 'like', '%'.$request->input('nombre').'%'))
-        ->when($request->has('dui'), fn ($query) => 
-            $query->where('dui', $request->dui))
-        ->when($request->has('correo'), fn ($query) => 
-            $query->where('correo', 'like', '%'.$request->input('correo').'%'))
+        ->when($request->has('DUI'), fn ($query) => 
+            $query->where('DUI', $request->DUI))
         ->paginate();
 
         return PacienteResource::collection($pacientes);

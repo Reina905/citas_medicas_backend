@@ -19,7 +19,7 @@ class HorarioFactory extends Factory
     {
         return [
             'user_id' => \App\Models\User::factory(),
-            'dia' => fake()->randomElement(['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes']),
+            'dia' => fake()->randomElement(['Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes']),
             'hora_inicio' => '08:00:00',
             'hora_fin' => '17:00:00',
         ];
